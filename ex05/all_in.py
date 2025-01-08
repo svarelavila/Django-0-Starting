@@ -1,5 +1,55 @@
 import sys
 
+def process_input():
+    states = {
+        "Oregon": "OR",
+        "Alabama": "AL",
+        "New Jersey": "NJ",
+        "Colorado": "CO"
+    }
+
+    capital_cities = {
+        "OR": "Salem",
+        "AL": "Montgomery",
+        "NJ": "Trenton",
+        "CO": "Denver"
+    }
+
+    # Crear un diccionario inverso de capitales a estados
+    capitals_to_states = {capital: state for state, code in states.items() for code, capital in capital_cities.items() if code == states[state]}
+
+    # Obtener la entrada del usuario
+    if len(sys.argv) != 2:
+        return
+
+    input_string = sys.argv[1]
+    expressions = [expr.strip() for expr in input_string.split(',')]
+
+    for expr in expressions:
+        if not expr:  # Ignorar expresiones vacías
+            continue
+        
+        # Buscar como estado
+        if expr in states:
+            state_code = states[expr]
+            capital = capital_cities[state_code]
+            print(f"{capital} is the capital of {expr}")
+        # Buscar como capital
+        elif expr in capitals_to_states:
+            state = capitals_to_states[expr]
+            print(f"{expr} is the capital of {state}")
+        # Entrada desconocida
+        else:
+            print(f"{expr} is neither a capital city nor a state")
+
+if __name__ == "__main__":
+    process_input()
+
+
+
+"""
+import sys
+
 def process_input(input_str: str):
     states = {
         "Oregon": "OR",
@@ -70,3 +120,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+"""

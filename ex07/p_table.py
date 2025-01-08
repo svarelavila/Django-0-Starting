@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 def parse_line(line: str):
     """Procesa una línea del archivo de entrada y devuelve un diccionario con los datos."""
     el = line.split("=")
@@ -10,13 +8,13 @@ def parse_line(line: str):
 def generate_table_body(elements):
     """Genera el cuerpo de la tabla HTML con los elementos proporcionados."""
     TEMPLATE = """
-    <td style="border: 1px solid black; padding: 10px; background-color: turquoise;">
+    <td class="element">
         <h4>{name}</h4>
         <ul>
-            <li>No {number}</li>
-            <li>{small}</li>
-            <li>{molar}</li>
-            <li>{electron} electron</li>
+            <li class="number">No {number}</li>
+            <li class="symbol">{small}</li>
+            <li class="mass">{molar}</li>
+            <li class="electrons">{electron} electron</li>
         </ul>
     </td>
     """
@@ -32,7 +30,7 @@ def generate_table_body(elements):
         
         # Añadir celdas vacías si es necesario
         for _ in range(position, int(dic["position"]) - 1):
-            body += "      <td></td>\n"
+            body += "      <td class='empty'></td>\n"
         
         position = int(dic["position"])
 
@@ -48,7 +46,6 @@ def generate_table_body(elements):
     body += "    </tr>\n"
     return body
 
-
 def generate_html(body):
     """Genera el archivo HTML completo insertando el cuerpo de la tabla en la estructura HTML base."""
     HTML = """
@@ -60,30 +57,52 @@ def generate_html(body):
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Periodic Table</title>
       <style>
+        body {{
+          font-family: Arial, sans-serif;
+          margin: 20px;
+          background-color: #f4f4f4;
+        }}
         table {{
           border-collapse: collapse;
+          margin: auto;
+          width: 80%;
         }}
-        h4 {{
+        td {{
           text-align: center;
+          padding: 10px;
+          border: 1px solid black;
+          width: 80px;
+          height: 100px;
+          background-color: #d3d3d3;
         }}
-        ul {{
-          list-style:none;
-          padding-left: 0px;
+        .element {{
+          background-color: #add8e6;
+          padding: 5px;
+          font-size: 0.9em;
+        }}
+        .element h4 {{
+          margin: 5px 0;
+          font-size: 1.2em;
+          color: black;
+        }}
+        .element ul {{
+          padding: 0;
+          margin: 0;
+          list-style: none;
         }}
       </style>
     </head>
     <body>
+      <h1 style="text-align: center;">Tabla Periódica</h1>
       <table>
         {body}
       </table>
     </body>
     </html>
     """
-    
     # Escribir el archivo HTML con el cuerpo generado
     with open("periodic_table.html", "w") as f:
         f.write(HTML.format(body=body))
-
 
 def main():
     """Función principal para leer el archivo, procesar los datos y generar el HTML."""
@@ -96,7 +115,6 @@ def main():
     
     # Generar y escribir el archivo HTML final
     generate_html(table_body)
-
 
 if __name__ == "__main__":
     main()

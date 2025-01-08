@@ -1,4 +1,4 @@
-def sort_musicians_by_year():
+def sort_and_print():
     d = {
         'Hendrix': '1942',
         'Allman': '1946',
@@ -21,13 +21,13 @@ def sort_musicians_by_year():
         'Thompson': '1949',
         'Burton': '1939',
     }
-    
-    # Ordenamos el diccionario primero por el año y luego alfabéticamente por el nombre
-    sorted_musicians = sorted(d.items(), key=lambda x: (x[1], x[0]))
-    
-    # Imprimimos solo los nombres, uno por línea
-    for musician in sorted_musicians:
-        print(musician[0])
 
-if __name__ == '__main__':
-    sort_musicians_by_year()
+    # Ordenar por año y luego por nombre
+    sorted_musicians = sorted(d.items(), key=lambda x: (x[1], x[0]))
+
+    # Imprimir los nombres en el orden correcto
+    for name, _ in sorted_musicians:
+        print(name)
+
+if __name__ == "__main__":
+    sort_and_print()

@@ -23,12 +23,17 @@ def var_to_dict():
         ('Burton', '1939')
     ]
     
-    # Convertir la lista de tuplas en un diccionario
-    my_dict = {year: name for name, year in d}
+    # Crear el diccionario acumulando nombres en caso de años duplicados
+    my_dict = {}
+    for name, year in d:
+        if year in my_dict:
+            my_dict[year] += f" {name}"  # Concatenar nombres
+        else:
+            my_dict[year] = name
 
     # Mostrar el diccionario en el formato requerido
-    for year in my_dict:
-        print(f"{year} : {my_dict[year]}")
+    for year, names in my_dict.items():
+        print(f"{year} : {names}")
 
 if __name__ == "__main__":
     var_to_dict()

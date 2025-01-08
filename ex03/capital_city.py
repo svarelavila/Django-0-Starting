@@ -1,36 +1,34 @@
 import sys
 
-
-def capital_city(state_name: str):
-    # Diccionarios de estados y sus capitales
+def find_capital():
+    # Diccionarios
     states = {
         "Oregon": "OR",
         "Alabama": "AL",
         "New Jersey": "NJ",
         "Colorado": "CO"
     }
+
     capital_cities = {
         "OR": "Salem",
         "AL": "Montgomery",
         "NJ": "Trenton",
         "CO": "Denver"
     }
-    
-    # Obtener la abreviatura del estado
-    state_abbreviation = states.get(state_name)
-    
-    if not state_abbreviation:
-        print("Unknown state")
+
+    # Verificar que se pase exactamente un argumento
+    if len(sys.argv) != 2:
         return
-    
-    # Imprimir la capital correspondiente
-    print(capital_cities.get(state_abbreviation))
 
+    # Obtener el argumento
+    state_name = sys.argv[1]
 
-def main():
-    # Verifica si hay exactamente un argumento
-    if len(sys.argv) == 2:
-        capital_city(sys.argv[1])  # Llamada a la función con el estado como argumento
+    # Buscar la capital correspondiente
+    state_code = states.get(state_name)
+    if state_code:
+        print(capital_cities[state_code])
+    else:
+        print("Unknown state")
 
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    find_capital()
