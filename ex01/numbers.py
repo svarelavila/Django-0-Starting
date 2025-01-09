@@ -1,16 +1,22 @@
-def display_numbers():
-    # Abrir y leer el archivo numbers.txt
+def read_and_print_numbers():
+    """
+    Reads the file 'numbers.txt', splits its content by commas,
+    and prints each number on a new line.
+    """
     try:
+        # Open the file and read its content
         with open("numbers.txt", "r") as file:
-            # Leer el contenido y separar los números por coma
-            content = file.read()
-            numbers = content.split(",")  # Convertir en una lista
+            content = file.read()  # Read the entire file
             
-            # Imprimir cada número en una nueva línea
+            # Split the content into numbers using commas
+            numbers = content.split(",")
+            
+            # Print each number on a new line
             for number in numbers:
-                print(number.strip())  # Quitar espacios en blanco si los hay
+                print(number.strip())  # Remove any extra spaces
     except FileNotFoundError:
-        print("Error: El archivo numbers.txt no existe.")
+        # Print an error message if the file doesn't exist
+        print("Error: The file 'numbers.txt' does not exist.")
 
 if __name__ == "__main__":
-    display_numbers()
+    read_and_print_numbers()
