@@ -1,7 +1,10 @@
 import sys
 
 def find_capital():
-    # Diccionarios
+    """
+    Finds and prints the capital city of a given state.
+    If the state does not exist, prints 'Unknown state'.
+    """
     states = {
         "Oregon": "OR",
         "Alabama": "AL",
@@ -16,15 +19,12 @@ def find_capital():
         "CO": "Denver"
     }
 
-    # Verificar que se pase exactamente un argumento
     if len(sys.argv) != 2:
         return
 
-    # Obtener el argumento
     state_name = sys.argv[1]
-
-    # Buscar la capital correspondiente
     state_code = states.get(state_name)
+
     if state_code:
         print(capital_cities[state_code])
     else:
