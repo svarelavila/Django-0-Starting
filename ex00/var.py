@@ -1,18 +1,27 @@
 def my_var():
-    var1 = 42
-    var2 = "42"
-    var3 = "quarente-deux"
-    var4 = 42.0
-    var5 = True
-    var6 = [42]
-    var7 = {42: 42}
-    var8 = (42,)
-    var9 = set()
+    """"
+    Initializes variables with different data types
+    and prints their values and types.
+    """
+    # Different types of variables
+    
+    variables = [
+        42,  # Integer
+        "42",  # String
+        "quarente-deux",  # Another string
+        42.0,  # Float
+        True,  # Boolean
+        [42],  # List
+        {42: 42},  # Dictionary
+        (42,),  # Tuple
+        set()  # Empty set
+    ]
 
-    variables = [var1, var2, var3, var4, var5, var6, var7, var8, var9]
-
+     # Iterete through the list and print value and type
     for var in variables:
         print(f"{var} has a type {type(var)}")
 
 if __name__ == "__main__":
     my_var()
+
+
