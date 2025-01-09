@@ -1,5 +1,10 @@
 def var_to_dict():
-    # Lista de tuplas (nombre, año)
+    """
+    Converts a list of tuples into a dictionary with years as keys. 
+    If a year appears multiple times, the names are concatenated as values.
+    """
+
+    # List of tuples (name, year)
     d = [
         ('Hendrix', '1942'),
         ('Allman', '1946'),
@@ -22,18 +27,21 @@ def var_to_dict():
         ('Thompson', '1949'),
         ('Burton', '1939')
     ]
-    
-    # Crear el diccionario acumulando nombres en caso de años duplicados
+
+    # Create the dictionary to handle duplicate years
     my_dict = {}
     for name, year in d:
+        # If the year is already in the dictionary, concatenate the new name
         if year in my_dict:
-            my_dict[year] += f" {name}"  # Concatenar nombres
+            my_dict[year] += f" {name}"
         else:
+            # Otherwise, initialize the dictionary key with the name
             my_dict[year] = name
 
-    # Mostrar el diccionario en el formato requerido
+    # Print the dictionary in the required format
     for year, names in my_dict.items():
         print(f"{year} : {names}")
 
+# Entry point for the program
 if __name__ == "__main__":
     var_to_dict()
