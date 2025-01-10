@@ -1,4 +1,4 @@
-def read_and_print_numbers():
+def print_numbers():
     """
     Reads the file 'numbers.txt', splits its content by commas,
     and prints each number on a new line.
@@ -19,4 +19,4 @@ def read_and_print_numbers():
         print("Error: The file 'numbers.txt' does not exist.")
 
 if __name__ == "__main__":
-    read_and_print_numbers()
+    print_numbers()

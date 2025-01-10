@@ -1,4 +1,9 @@
-def sort_and_print():
+def sort_musicians():
+    """
+    Sorts and prints the names of musicians by year (ascending),
+    then alphabetically for similar years.
+    """
+    # Dictionary with musicians and their birth years
     d = {
         'Hendrix': '1942',
         'Allman': '1946',
@@ -22,12 +27,14 @@ def sort_and_print():
         'Burton': '1939',
     }
 
-    # Ordenar por año y luego por nombre
+    # Sorting the dictionary:
+    # Transform dictionary items into a list of tuples and sort them
+    # The key function sorts first by year (x[1]) and then alphabetically by name (x[0])
     sorted_musicians = sorted(d.items(), key=lambda x: (x[1], x[0]))
 
-    # Imprimir los nombres en el orden correcto
-    for name, _ in sorted_musicians:
-        print(name)
+    # Print only the musician names in the desired order
+    for musician, _ in sorted_musicians:
+        print(musician)
 
 if __name__ == "__main__":
-    sort_and_print()
+    sort_musicians()
