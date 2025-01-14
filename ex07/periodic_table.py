@@ -60,13 +60,10 @@ def generate_table_body(elements):
     return body
 
 
-def generate_html(file_path):
+def generate_html(elements):
     """
     Generates the complete HTML file for the periodic table.
     """
-    # Parse elements from the input file
-    elements = parse_periodic_table(file_path)
-    # Generate the table body
     body = generate_table_body(elements)
 
     HTML = f"""
@@ -107,7 +104,6 @@ def generate_html(file_path):
                 font-size: 1.2em;
                 color: #005580;
                 font-weight: bold;
-                margin: 5px;
             }}
             ul {{
                 list-style: none;
@@ -125,7 +121,7 @@ def generate_html(file_path):
     </html>
     """
 
-    # Write the HTML to a file
+    # Write the HTML file
     with open("periodic_table.html", "w") as file:
         file.write(HTML)
 
@@ -134,11 +130,17 @@ def generate_html(file_path):
 
 def main():
     """
-    Main function to parse the periodic table file and generate the HTML file.
+    Main function to handle the workflow of parsing and
+    generating the HTML file.
     """
-    # Ensure this file is in the same directory
+    # Ensure the file is in the same directory
     file_path = "periodic_table.txt"
-    generate_html(file_path)
+
+    # Step 1: Parse the periodic table file
+    elements = parse_periodic_table(file_path)
+
+    # Step 2: Generate the HTML file
+    generate_html(elements)
 
 
 if __name__ == "__main__":
