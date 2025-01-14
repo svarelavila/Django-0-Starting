@@ -1,5 +1,6 @@
 import sys
 
+
 def find_state():
     """
     Finds and prints the state corresponding to a given capital city.
@@ -46,6 +47,7 @@ def find_state():
     else:
         # If no state code was found, print an error message
         print("Unknown capital city")
+
 
 if __name__ == "__main__":
     find_state()

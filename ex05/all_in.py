@@ -1,12 +1,12 @@
 import sys
 
+
 def process_input():
     """
     Processes user input to determine if it is a state or a capital city.
     Outputs the relationship between states and capitals, or an error
     message if not found.
     """
-
     # Dictionary mapping states to their abbreviations
     states = {
         "Oregon": "OR",
@@ -14,7 +14,6 @@ def process_input():
         "New Jersey": "NJ",
         "Colorado": "CO"
     }
-
     # Dictionary mapping abbreviations to their capital cities
     capital_cities = {
         "OR": "Salem",
@@ -22,14 +21,12 @@ def process_input():
         "NJ": "Trenton",
         "CO": "Denver"
     }
-
     # Create an inverted dictionary mapping capitals to states
     capitals_to_states = {
         capital: state for state, code in states.items()
         for code, capital in capital_cities.items()
         if code == states[state]
     }
-
     # Ensure exactly one argument is provided
     if len(sys.argv) != 2:
         return
@@ -55,6 +52,7 @@ def process_input():
         # Handle unknown input
         else:
             print(f"{expr} is neither a capital city nor a state")
+
 
 if __name__ == "__main__":
     process_input()

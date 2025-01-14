@@ -1,42 +1,53 @@
-#!/usr/bin/python3
+def parse_periodic_table(file_path):
+    """
+    Reads and parses the periodic_table.txt file.
+    Returns a list of dictionaries containing element data.
+    """
+    elements = []
+    with open(file_path, "r") as file:
+        for line in file:
+            elem_name, attributes = line.strip().split(" = ")
+            elem_data = dict(attr.split(":")
+                             for attr in attributes.split(", "))
+            elem_data["name"] = elem_name
+            elements.append(elem_data)
+    return elements
 
-def parse_line(line: str):
-    """Procesa una línea del archivo de entrada y devuelve un diccionario con los datos."""
-    el = line.split("=")
-    result = dict((value.strip().split(":") for value in el[1].split(", ")))
-    result["name"] = el[0].strip()
-    return result
 
 def generate_table_body(elements):
-    """Genera el cuerpo de la tabla HTML con los elementos proporcionados."""
+    """
+    Generates the HTML table body for the periodic table.
+    Correctly places elements and ensures proper handling of empty cells.
+    """
     TEMPLATE = """
-    <td style="border: 1px solid black; padding: 10px; background-color: turquoise;">
+    <td class="element">
         <h4>{name}</h4>
         <ul>
-            <li>No {number}</li>
-            <li>{small}</li>
-            <li>{molar}</li>
-            <li>{electron} electron</li>
+            <li class="number">No. {number}</li>
+            <li class="symbol">{small}</li>
+            <li class="mass">{molar}</li>
+            <li class="electrons">{electron} electron</li>
         </ul>
     </td>
     """
-    
+
     body = "<tr>"
-    position = 0  # Inicializamos la posición en 0
-    
+    position = 0  # Start from position 0
+
     for dic in elements:
-        # Si la posición actual es mayor que la de este elemento, hacemos salto de línea
+        # Start a new row if current position exceeds the element's position
         if position > int(dic["position"]):
-            body += "    </tr>\n    <tr>"
+            body += "</tr>\n<tr>"
             position = 0
-        
-        # Añadir celdas vacías si es necesario
+
+        # Add empty cells for missing positions
         for _ in range(position, int(dic["position"]) - 1):
-            body += "      <td></td>\n"
-        
+            body += "<td class='empty'></td>\n"
+
+        # Update position to current element's position
         position = int(dic["position"])
 
-        # Añadir el elemento a la tabla
+        # Add the current element to the table
         body += TEMPLATE.format(
             name=dic["name"],
             number=dic["number"],
@@ -44,58 +55,90 @@ def generate_table_body(elements):
             molar=dic["molar"],
             electron=dic["electron"],
         )
-    
-    body += "    </tr>\n"
+
+    body += "</tr>\n"  # Close the last row
     return body
 
 
-def generate_html(body):
-    """Genera el archivo HTML completo insertando el cuerpo de la tabla en la estructura HTML base."""
-    HTML = """
+def generate_html(file_path):
+    """
+    Generates the complete HTML file for the periodic table.
+    """
+    # Parse elements from the input file
+    elements = parse_periodic_table(file_path)
+    # Generate the table body
+    body = generate_table_body(elements)
+
+    HTML = f"""
     <!DOCTYPE html>
     <html lang="en">
     <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Periodic Table</title>
-      <style>
-        table {{
-          border-collapse: collapse;
-        }}
-        h4 {{
-          text-align: center;
-        }}
-        ul {{
-          list-style:none;
-          padding-left: 0px;
-        }}
-      </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Periodic Table</title>
+        <style>
+            table {{
+                border-collapse: collapse;
+                margin: auto;
+                width: 90%;
+            }}
+            td {{
+                border: 1px solid black;
+                width: 100px;
+                height: 120px;
+                text-align: center;
+                vertical-align: top;
+                padding: 5px;
+            }}
+            .element {{
+                background-color: #f0f8ff;
+                font-size: 0.9em;
+                }}
+            .symbol {{
+                font-size: 1.5em;
+                font-weight: bold;
+                color: #B22222;
+            }}
+            .empty {{
+                background-color: #e0e0e0;
+            }}
+            h4 {{
+                margin: 5px 0;
+                font-size: 1.2em;
+                color: #005580;
+                font-weight: bold;
+                margin: 5px;
+            }}
+            ul {{
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }}
+        </style>
     </head>
     <body>
-      <table>
-        {body}
-      </table>
+        <h1 style="text-align: center;">Periodic Table</h1>
+        <table>
+            {body}
+        </table>
     </body>
     </html>
     """
-    
-    # Escribir el archivo HTML con el cuerpo generado
-    with open("periodic_table.html", "w") as f:
-        f.write(HTML.format(body=body))
+
+    # Write the HTML to a file
+    with open("periodic_table.html", "w") as file:
+        file.write(HTML)
+
+    print("HTML file 'periodic_table.html' generated successfully.")
 
 
 def main():
-    """Función principal para leer el archivo, procesar los datos y generar el HTML."""
-    # Leer el archivo y procesar las líneas
-    with open("periodic_table.txt", "r") as f:
-        elements = [parse_line(line.strip()) for line in f.readlines()]
-    
-    # Generar el cuerpo de la tabla con los elementos procesados
-    table_body = generate_table_body(elements)
-    
-    # Generar y escribir el archivo HTML final
-    generate_html(table_body)
+    """
+    Main function to parse the periodic table file and generate the HTML file.
+    """
+    # Ensure this file is in the same directory
+    file_path = "periodic_table.txt"
+    generate_html(file_path)
 
 
 if __name__ == "__main__":

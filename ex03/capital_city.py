@@ -1,5 +1,6 @@
 import sys
 
+
 def find_capital():
     """
     Finds and prints the capital city of a given state.
@@ -29,6 +30,7 @@ def find_capital():
         print(capital_cities[state_code])
     else:
         print("Unknown state")
+
 
 if __name__ == "__main__":
     find_capital()

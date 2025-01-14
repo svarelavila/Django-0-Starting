@@ -36,5 +36,6 @@ def sort_musicians():
     for musician, _ in sorted_musicians:
         print(musician)
 
+
 if __name__ == "__main__":
     sort_musicians()
