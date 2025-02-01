@@ -7,9 +7,9 @@ Este repositorio contiene los ejercicios de entrenamiento en **Python-Django**, 
 - **Ordenamiento y manipulación de datos**
 - **Generación de archivos y procesamiento de datos**
 
-## 📌 Ejercicios
+### 🧩 Resumen de Ejercicios
 
-| 🔢 Ejercicio | 📄 Descripción |
+| Ejercicio | Descripción |
 |-------------|----------------|
 | **ex00** | Declarar y mostrar variables de distintos tipos en `var.py`. |
 | **ex01** | Leer y mostrar números de un archivo en `numbers.py`. |
