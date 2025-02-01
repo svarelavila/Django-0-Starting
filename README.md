@@ -19,3 +19,9 @@ Este repositorio contiene los ejercicios de entrenamiento en **Python-Django**, 
 | **ex05** | Determinar si una entrada es un estado, capital o desconocido en `all_in.py`. |
 | **ex06** | Ordenar un diccionario de músicos por año y nombre en `my_sort.py`. |
 | **ex07** | Generar una página HTML con la tabla periódica desde `periodic_table.py`. |
+
+### 🏆 Evaluación
+
+<p align="left">
+  <img src="https://github.com/svarelavila/svarelavila/blob/main/imagenes/ok_100.png" alt="logo" width="125"/>
+</p>
