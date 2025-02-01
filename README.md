@@ -1,4 +1,4 @@
-# 📌 Python-Django - Starting
+# 📌 Training Python-Django - 0 Starting
 
 Este repositorio contiene los ejercicios de entrenamiento en **Python-Django**, con enfoque en la sintaxis y semántica básica de **Python**. Durante este proceso, se cubrirán los siguientes temas:
 
